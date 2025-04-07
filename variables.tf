@@ -1,87 +1,92 @@
+variable "region" {
+  type    = string
+  default = ""
+}
+
 variable "name" {
   description = "VPC, ALB 기타 등등 이름"
-  type = string
-  default = "atlantis"
+  type        = string
+  default     = "atlantis"
 }
 
 variable "tags" {
   description = "리소스 태그"
-  type = map(string)
-  default = {}
+  type        = map(string)
+  default     = {}
 }
 
 # VPC
 variable "vpc_id" {
   description = "존재하는 VPC의 ID, 만약 없으면 생성"
-  type = string
-  default = ""
+  type        = string
+  default     = ""
 }
 
 variable "public_subnet_ids" {
   description = "VPC내부의 public subnet id list"
-  type = list(string)
-  default = []
+  type        = list(string)
+  default     = []
 }
 
 variable "private_subnet_ids" {
   description = "VPC내부의 private subnet id list"
-  type = list(string)
-  default = []
+  type        = list(string)
+  default     = []
 }
 
 variable "cidr" {
   description = "`vpc_id`가 지정되지 않은 경우 생성될 VPC의 CIDR 블록"
-  type = string
-  default = ""
+  type        = string
+  default     = ""
 }
 
 variable "azs" {
   description = "리전 내 가용 영역 목록"
-  type = list(string)
-  default = []
+  type        = list(string)
+  default     = []
 }
 
 variable "public_subnets" {
-    description = "VPC 내부의 퍼블릭 서브넷 목록"
-    type = list(string)
-    default = []
+  description = "VPC 내부의 퍼블릭 서브넷 목록"
+  type        = list(string)
+  default     = []
 }
 
 variable "private_subnets" {
   description = "VPC 내부의 프라이빗 서브넷 목록"
-  type = list(string)
-  default = []
+  type        = list(string)
+  default     = []
 }
 
 # ALB
 variable "alb_ingress_cidr_blocks" {
   description = "ALB의 모든 인그레스 규칙에 사용할 IPv4 CIDR 범위 목록"
-  type = list(string)
-  default = ["0.0.0.0/0"]
+  type        = list(string)
+  default     = ["0.0.0.0/0"]
 }
 
 variable "alb_log_bucket_name" {
   description = "로드 밸런서 액세스 로그를 저장하기 위한 S3 버킷(외부에서 생성됨). alb_logging_enabled가 true인 경우 필수"
-  type = string
-  default = ""
+  type        = string
+  default     = ""
 }
 
 variable "alb_log_location_prefix" {
   description = "로그가 저장되는 log_bucket_name 내의 S3 접두사"
-  type = string
-  default = ""
+  type        = string
+  default     = ""
 }
 
 variable "alb_logging_enabled" {
   description = "ALB가 S3에 요청을 기록할지 여부를 제어"
-  type = bool
-  default = false
+  type        = bool
+  default     = false
 }
 
 variable "alb_enable_deletion_protection" {
   description = "ALB 삭제 방지 옵션션"
-  type = bool
-  default = false
+  type        = bool
+  default     = false
 }
 
 # ACM
@@ -92,14 +97,14 @@ variable "certificate_arn" {
 }
 
 variable "acm_certificate_domain_name" {
-  description =  "ACM 인증서에 사용할 Route53 도메인 이름. 이 도메인에 대한 Route53 존은 미리 생성되어 있어야 함. route53_zone_name의 값과 다를 경우 지정"
+  description = "ACM 인증서에 사용할 Route53 도메인 이름. 이 도메인에 대한 Route53 존은 미리 생성되어 있어야 함. route53_zone_name의 값과 다를 경우 지정"
   type        = string
   default     = ""
 }
 
 # Route53
 variable "route53_zone_name" {
-  description =  "ACM 인증서를 생성하고 메인 A-레코드를 설정할 Route53 존 이름, 끝에 점 제외"
+  description = "ACM 인증서를 생성하고 메인 A-레코드를 설정할 Route53 존 이름, 끝에 점 제외"
   type        = string
   default     = ""
 }
@@ -110,7 +115,7 @@ variable "route53_zone_id" {
 }
 
 variable "create_route53_record" {
-  description =  "Atlantis에 대한 Route53 레코드를 생성할지 여부"
+  description = "Atlantis에 대한 Route53 레코드를 생성할지 여부"
   type        = bool
   default     = false
 }
@@ -173,7 +178,7 @@ variable "ecs_service_desired_count" {
 }
 
 variable "ecs_service_deployment_maximum_percent" {
-  description = "배포 중 서비스에서 실행 중일 수 있는 태스크 수의 상한선 (서비스의 desiredCount의 백분율로 표현)"  
+  description = "배포 중 서비스에서 실행 중일 수 있는 태스크 수의 상한선 (서비스의 desiredCount의 백분율로 표현)"
   type        = number
   default     = 200
 }
@@ -185,7 +190,7 @@ variable "ecs_service_deployment_minimum_healthy_percent" {
 }
 
 variable "ecs_task_cpu" {
-  description =  "태스크에서 사용하는 CPU 유닛 수"
+  description = "태스크에서 사용하는 CPU 유닛 수"
   type        = number
   default     = 256
 }
@@ -317,4 +322,22 @@ variable "aws_ssm_path" {
   description = "SSM용 AWS ARN 접두어 (공용 AWS 지역 또는 Govcloud). 유효 옵션: aws, aws-us-gov."
   type        = string
   default     = "aws"
+}
+
+# backend
+variable "backend_dynamo_table_name" {
+  type    = string
+  default = ""
+}
+variable "backend_bucket_name" {
+  type    = string
+  default = ""
+}
+variable "backend_key" {
+  type    = string
+  default = ""
+}
+variable "backend_encrypt" {
+  type    = bool
+  default = true
 }

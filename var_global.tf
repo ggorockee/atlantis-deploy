@@ -16,9 +16,7 @@ variable "atlantis_user" {
 # Account IDs
 # Add all account ID to here 
 variable "account_id" {
-  default = {
-    id   = "<Your-account-id>"
-  }
+  type = string
 }
 
 # Remote State that will be used when creating other resources

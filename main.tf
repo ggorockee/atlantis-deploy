@@ -84,7 +84,7 @@ module "alb" {
   vpc_id          = local.vpc_id
   subnets         = local.public_subnet_ids
   security_groups = flatten([module.alb_https_sg.security_group_id, module.alb_http_sg.security_group_id, var.security_group_ids])
-  
+
   enable_deletion_protection = var.alb_enable_deletion_protection
 
   access_logs = {
@@ -96,7 +96,7 @@ module "alb" {
   listeners = [
     {
       port            = 443
-      protocol = "HTTPS"
+      protocol        = "HTTPS"
       certificate_arn = var.certificate_arn == "" ? module.acm.acm_certificate_arn : var.certificate_arn
       forward = {
         target_group_key = "target"

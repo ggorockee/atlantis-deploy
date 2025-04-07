@@ -33,7 +33,7 @@ output "alb_dns_name" {
   value       = module.alb.dns_name
 }
 
-output "ecs assis_task_definition" {
+output "ecs_assis_task_definition" {
   description = "ECS 서비스용 태스크 정의 (외부 트리거용)."
   value       = aws_ecs_service.atlantis.task_definition
 }

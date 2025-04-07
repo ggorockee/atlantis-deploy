@@ -6,6 +6,8 @@ cidr = "192.168.0.0/16"
 
 azs = ["ap-northeast-2a", "ap-northeast-2c"]
 
+region = "ap-northeat-2"
+
 private_subnets = ["192.168.1.0/24", "192.168.2.0/24"]
 
 public_subnets = ["192.168.11.0/24", "192.168.12.0/24"]
@@ -16,8 +18,8 @@ public_subnets = ["192.168.11.0/24", "192.168.12.0/24"]
 # public_subnet_ids = ["subnet-1211eef5", "subnet-163466ab"]
 
 # DNS
-route53_zone_name = ""
-route53_zone_id   = ""
+route53_zone_name = "ggorockee.com"
+route53_zone_id   = "Z01226571VHYGKN9MBH4G"
 
 # ALB
 alb_enable_deletion_protection = false
@@ -30,12 +32,12 @@ certificate_arn = ""
 ecs_service_assign_public_ip = true
 
 # Atlantis
-atlantis_allowed_repo_names = [""]
-atlantis_repo_whitelist     = ["github.com/<Org or YourUserName>/*"]
+atlantis_allowed_repo_names = ["terraform-provisioning"]
+atlantis_repo_whitelist     = ["github.com/ggorockee/*"]
 
 # Specify one of the following block.
 # For Github
-atlantis_github_user = ""
+atlantis_github_user = "ggorockee"
 
 # For Gitlab
 atlantis_gitlab_user       = ""
@@ -52,3 +54,9 @@ atlantis_bitbucket_user_token = ""
 tags = {
   Name = "atlantis"
 }
+
+# backend
+backend_bucket_name = "ggorockee-apnortheast2-tfstate"
+backend_key = "provisioning/terraform/platform/atlantis/terraform.tfstate"
+backend_encrypt = true
+backend_dynamo_table_name = "terraform-lock-table"

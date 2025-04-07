@@ -1,0 +1,5 @@
+export AWS_ACCESS_KEY_ID=""
+export AWS_SECRET_ACCESS_KEY=""
+export TF_VAR_atlantis_github_user_token=""
+export TF_VAR_certificate_arn=""
+export TF_VAR_account_id=""

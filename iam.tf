@@ -13,7 +13,7 @@ resource "aws_iam_role" "atlantis_ggorockee_admin" {
         "Effect" : "Allow",
         "Principal" : {
           "AWS" : [
-            "arn:aws:iam::${var.account_id}:role/atlantis-ecs_task_execution"
+            "arn:aws:iam::${var.account_id.id}:role/atlantis-ecs_task_execution"
           ]
         },
         "Action" : "sts:AssumeRole"
